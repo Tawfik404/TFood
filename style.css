@@ -1,0 +1,46 @@
+/* 
+f8f9fa
+e9ecef
+dee2e6
+ced4da
+adb5bd
+6c757d
+495057
+343a40
+212529
+ */
+body{
+    background-color: #212529 !important;
+}
+.container-fluid{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form{
+    background-color: #343a40;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+h1{
+    color: #ced4da!important;
+}
+span{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 4em !important;
+    color: #e9ecef;
+}
+p{
+    color: #adb5bd;
+    font-size: 0.79em;
+}
+#img{
+    display: none;
+}
+#camera{
+    display: none;
+}

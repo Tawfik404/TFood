@@ -8,15 +8,33 @@ adb5bd
 495057
 343a40
 212529
- */
-body{
-    background-color: #212529 !important;
+*/
+#row{
+    display: flex;
+    justify-content: center;
+}
+#choose{
+    font-size: 1em;
+    border-radius: 20vh;
+    width: fit-content;
+    margin-right: 5px;
+    border: 0px;
+    font-weight: bold;
+}
+#retry{
+    font-size: 1em;
+    border-radius: 20vh;
+    width: fit-content;
+    
 }
 .container-fluid{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+     height: 100vh;
+     align-items: center;
+     display: flex;
+     justify-content: center;
+ }
+body{
+    background-color: #212529 !important;
 }
 
 form{
@@ -43,4 +61,11 @@ p{
 }
 #camera{
     display: none;
+}
+.cols{
+    display: flex;
+    justify-content: center;
+}
+#preview{
+    width: 35vw;
 }

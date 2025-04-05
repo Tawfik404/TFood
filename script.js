@@ -69,7 +69,7 @@ img.addEventListener("change", function (event) {
     }
 
 
-    fetch('/api/oauth')
+    fetch('https://t-food-kappa.vercel.app/api/oauth')
     .then(res => res.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error:', error));

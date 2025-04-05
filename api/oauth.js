@@ -1,10 +1,11 @@
 // api/oauth.js
 
-const request = require("request");
+import request from 'request';
+import { Buffer } from 'buffer';
 
-module.exports = (req, res) => {
-  const ClientID = "eacf52e775994f528cd4156656cd590d";
-  const ClientSecret = "e68f2a0d58794939ac67a1366a826dfd";
+export default async function handler(req, res) {
+  const ClientID = 'eacf52e775994f528cd4156656cd590d';
+  const ClientSecret = 'e68f2a0d58794939ac67a1366a826dfd';
 
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -16,34 +17,39 @@ module.exports = (req, res) => {
     return res.status(200).end();
   }
 
+  const basicAuth = Buffer.from(`${ClientID}:${ClientSecret}`).toString('base64');
+
   const options = {
-    method: "POST",
-    url: "https://oauth.fatsecret.com/connect/token",
-    auth: {
-      user: ClientID,
-      password: ClientSecret,
-    },
+    method: 'POST',
+    url: 'https://oauth.fatsecret.com/connect/token',
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      'Authorization': `Basic ${basicAuth}`,
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
     form: {
-      grant_type: "client_credentials",
-      scope: "basic",
-    },
-    json: true,
+      grant_type: 'client_credentials',
+      scope: 'basic'
+    }
   };
 
   request(options, (error, response, body) => {
     if (error) {
-      console.error("Request error:", error);
+      console.error('Request error:', error);
       return res.status(500).json({ error: error.message });
     }
 
-    if (response.statusCode !== 200) {
-      console.error("Bad response:", body);
-      return res.status(response.statusCode).json({ error: body });
-    }
+    try {
+      const data = JSON.parse(body);
 
-    return res.status(200).json(body);
+      if (response.statusCode !== 200) {
+        console.error('API error:', data);
+        return res.status(response.statusCode).json({ error: data });
+      }
+
+      return res.status(200).json(data);
+    } catch (parseError) {
+      console.error('Response parsing failed:', body);
+      return res.status(500).json({ error: 'Failed to parse response from API.' });
+    }
   });
-};
+}

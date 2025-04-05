@@ -19,17 +19,23 @@ col1.classList.add("cols")
 let col2 = document.createElement("div")
 col2.classList.add("col-12")
 col2.classList.add("cols")
-
+let retry;
+let upImg;
+let choose;
+img.name = 'img'
 img.addEventListener("change", function (event) {
-    let upImg = event.target.files[0];
+    upImg = event.target.files[0];
 
-    let choose = document.createElement("button")
+    choose = document.createElement("button")
+    choose.type = "submit"
     choose.id = "choose"
     choose.textContent = "Choose"
+    choose.name = "choose"
 
-    let retry = document.createElement("button")
+    retry = document.createElement("button")
     retry.id = "retry"
     retry.textContent = "start over"
+    retry.type = "reset"
 
     row.children[0].remove()
     row.children[0].remove()
@@ -61,8 +67,50 @@ img.addEventListener("change", function (event) {
     else {
         console.log("No file selected.");
     }
+
+
+    fetch('/api/oauth')
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+
+
+//     if (!upImg) return;
+//     const formData = new FormData();
+//     formData.append("image",upImg);
+
+// fetch("server.php", {
+//     method: "POST",
+//     body: formData
+// })
+// .then(response => response.text())
+// .then(data => console.log(data))
+// .catch(error => console.error("Error:", error));
+
+
+
 })
 
+
+// choose.addEventListener("submit",function(event){
+//     console.log(event);
+    
+//     event.target.preventDefault()
+
+
+// event.target.submit()
+// })
+
+
+
+
+
+  
+// console.log(location.href);
+// retry.addEventListener("click", function(event){
+//     location.reload()
+    
+// })
 // choose.addEventListener("click",function(event){
 
 // })

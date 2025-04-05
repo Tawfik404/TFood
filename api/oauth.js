@@ -20,29 +20,33 @@ module.exports = (req, res) => {
       json: true
    };
 
+   // Add CORS headers
+   res.setHeader('Access-Control-Allow-Origin', '*');
+   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
-   res.setHeader('Access-Control-Allow-Origin', '*');  // Allow all origins (you can specify a specific origin instead of '*' if needed)
-   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');  // Allow specific HTTP methods
-   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');  // Allow specific headers
-
-   // If the request is an OPTIONS request (pre-flight request for CORS), send a quick response
    if (req.method === 'OPTIONS') {
-      return res.status(200).end();
+      return res.status(200).end(); // Handle pre-flight request
    }
 
-   
+   // Log incoming request
+   console.log('Incoming request:', req.method, req.url);
+
+   // Make the external API request
    request(options, (error, response, body) => {
       if (error) {
-         // Send a 500 error if something went wrong with the request
+         console.error('Error during API request:', error);
          return res.status(500).json({ error: error.message });
       }
 
+      console.log('API response status:', response.statusCode);
+      console.log('API response body:', body);
+
       if (response.statusCode !== 200) {
-         // Handle non-200 status codes
+         console.error('API error response:', body);
          return res.status(response.statusCode).json({ error: body });
       }
 
-      // Return the response from the API as a JSON response
       return res.status(200).json(body);
    });
 };

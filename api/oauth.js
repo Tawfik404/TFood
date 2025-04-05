@@ -1,7 +1,7 @@
 // api/oauth.js
-module.exports = (req, res) => {
-   let ClientID = "eacf52e775994f528cd4156656cd590d";
-   let ClientSecret = "e68f2a0d58794939ac67a1366a826dfd";
+module.exports = (req, res) => {   
+   let clientID = 'eacf52e775994f528cd4156656cd590d'
+   let clientSecret = 'e68f2a0d58794939ac67a1366a826dfd'
 
    const request = require("request");
 
@@ -9,8 +9,8 @@ module.exports = (req, res) => {
       method: 'POST',
       url: 'https://oauth.fatsecret.com/connect/token',
       auth: {
-         user: ClientID,
-         password: ClientSecret
+         user: clientID,
+         password: clientSecret
       },
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
       form: {

@@ -6,14 +6,13 @@
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "dev": "vercel dev",
-      "deploy": "vercel --prod" 
+      "deploy": "vercel --prod"
     },
     "dependencies": {
-      "request": "^2.88.2" 
+      "node-fetch": "^2.6.7"
     },
-    "devDependencies": {
-    },
-    "author": "", 
+    "devDependencies": {},
+    "author": "",
     "license": "ISC",
     "engines": {
       "node": ">=18.0.0"
